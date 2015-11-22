@@ -1,0 +1,57 @@
+#wrapper {
+    background-image: url(../img/brushed.png);
+    min-height: 100%;
+    height: 100%;
+    margin: 0px auto -100px;
+    width: 100vw;
+}
+
+body {
+    margin: 0px;
+}
+
+header {
+    height: 100px;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.3);
+}
+
+footer {
+    height: 100px;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.3);
+}
+
+#upload {
+    float:right;
+    font-size: 2em;
+    width: 200px;
+    height: 100px;
+    background-color: rgba(0,0,0,0.1);
+    color: purple;
+    -webkit-transition: 0.5s;  
+}
+
+#upload:hover {
+    background-color: rgba(0,0,0,0.3);
+    
+}
+
+#uploadForm {
+    height: 80px;
+    width: 300px;
+    padding: 20px;
+    float:right;
+    background-color: rgba(0,0,0,0.3);
+}
+
+#upload p {
+    display: block;
+    text-align: center; 
+}
+
+#upload+form {
+    float:right;
+    width:300px;
+    height:400px;
+}
