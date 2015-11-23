@@ -24,58 +24,47 @@
             <section id="uploadForm">
                 <form method="post" action="index.php" enctype="multipart/form-data">
                     <p>
-                        <input type="file" name="upImage" >
+                        <input type="file" name="upImage">
                     </p>
                     <p>
                         <input type="submit" name="submit" value="Upload Image">
                     </p>
                 </form>
+				    <?php
+	$img_dir = "img/uploads/";
+    if(isset($_POST["submit"]) && $_POST["submit"] === "Upload Image") {
+
+		$target_file = $img_dir . basename($_FILES["upImage"]["name"]);
+		$validIMG = 1;
+		
+		getimagesize($_FILES["upImage"]["name"]);
+		if( file_exists($target_file) ){
+			$validIMG = 0;
+		}
+		
+		// Tries to move the uploaded img file away from the tmpfolder if it's a valid img
+		if($validIMG === 1 && move_uploaded_file($_FILES["upImage"]["tmp_name"], $target_file)){}
+	}
+    ?>
             </section>
             
-            
+			<?php
+				$uploadedIMG = scandir($img_dir);
+				array_shift($uploadedIMG);
+				array_shift($uploadedIMG);
+				
+				foreach($uploadedIMG as $img){
+			?>
+				<div class="image">
+					<img src=<?php echo "\"" . $img_dir . $img . "\""; ?>>
+				</div>
+			<?php
+				}
+				
+				
+				
+            ?>
         </div>
     </body>
-    <?php
-    
-    if(isset($_POST["submit"])) {
-        $target_dir = "img/uploads/";
-        $target_file = $target_dir . basename($_FILES["upImage"]["name"]);
-        $uploadOk = 1;
-        $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-        // Check if image file is a actual image or fake image
-        if(isset($_POST["submit"])) {
-            $check = getimagesize($_FILES["upImage"]["tmp_name"]);
-            if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
-                $uploadOk = 1;
-            } else {
-                echo "File is not an image.";
-                $uploadOk = 0;
-            }
-        }
-        // Check if file already exists
-        if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
-            $uploadOk = 0;
-        }
-        // Check if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        } else {
-            if (move_uploaded_file($_FILES["upImage"]["tmp_name"], $target_file)) {
-                echo "The file ". basename( $_FILES["upImage"]["name"]). " has been uploaded.";
-            } else {
-                echo "Sorry, there was an error uploading your file.";
-            }
-        }
-        
-    }
-        
-        
-        
-    
-    
-    
-    ?>
+
 </html>
