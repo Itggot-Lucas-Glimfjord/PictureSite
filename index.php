@@ -23,20 +23,11 @@
             </header>
 			
 			<div id="position_displacer" class="grid-100"></div>
-			<div id="uploadForm">
-					<form method="post" action="index.php" enctype="multipart/form-data">
-						<p>
-							<input type="file" name="upImage">
-						</p>
-						<p>
-							<input type="submit" name="submit" value="Upload Image">
-						</p>
-					</form>
-				
-			</div>
+
 
 			<?php
-				if(isset($_POST["submit"]) && $_POST["submit"] === "Upload Image") {
+				if(isset($_POST["submit"]) && $_POST["submit"] === "Upload Image") {                    
+                    
 					$img_dir = "img/uploads/";
 					$target_file = $img_dir . basename($_FILES["upImage"]["name"]);
 					$validIMG = 1;
@@ -92,7 +83,19 @@
 				?>
 				
             </section>
-			   
+            
+            <section id="settingsCol" class="grid-20">
+                <div id="uploadForm" class="setting">
+                        <form method="post" action="index.php" enctype="multipart/form-data">
+                            <p>
+                                <input type="file" name="upImage">
+                            </p>
+                            <p>
+                                <input type="submit" name="submit" value="Upload Image">
+                            </p>
+                    </form>
+                </div>
+            </section>			   
         </div>
     </body>
 
